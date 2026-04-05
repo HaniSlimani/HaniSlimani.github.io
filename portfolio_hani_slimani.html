@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hani Slimani — Étudiant en Informatique</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #050505;
+    --bg2: #0f0f0f;
+    --bg3: #161616;
+    --surface: #1a1a1a;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #e8e4dd;
+    --muted: #6b6760;
+    --muted2: #9a9590;
+    --accent: #d4a843;
+    --accent2: #5b8fa8;
+    --green: #4caf7d;
+    --red: #e05a4e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* CURSOR CUSTOM */
+  body { cursor: default; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 60px;
+    background: rgba(5,5,5,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-content {
+    flex: 1;
+    max-width: 700px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(54px, 7vw, 90px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-name .highlight {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--muted2);
+    letter-spacing: 0.04em;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-subtitle::before {
+    content: '>';
+    color: var(--green);
+    font-size: 14px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--muted2);
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 3rem;
+    border-left: 2px solid var(--border2);
+    padding-left: 1.2rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .btn-primary {
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #050505;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .btn-ghost {
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 0.5px solid var(--border2);
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--text); background: rgba(255,255,255,0.04); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .stat-item {}
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+
+  .hero-right {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    opacity: 0.6;
+  }
+
+  .hero-right-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 0;
+    transition: color 0.2s;
+    writing-mode: vertical-rl;
+  }
+
+  /* === SECTIONS COMMUNES === */
+  section {
+    padding: 100px 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* === ABOUT / SKILLS === */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    color: var(--muted2);
+    line-height: 1.85;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text strong { color: var(--text); font-weight: 600; }
+
+  .skills-col {}
+
+  .skill-category {
+    margin-bottom: 2rem;
+  }
+
+  .skill-cat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 0.5px solid var(--border2);
+    border-radius: 2px;
+    color: var(--muted2);
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .tag:hover { border-color: var(--accent); color: var(--text); }
+
+  .tag.accent { border-color: rgba(212,168,67,0.3); color: var(--accent); }
+
+  /* === PROJETS === */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--bg);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px; height: 0;
+    background: var(--accent);
+    transition: height 0.3s ease;
+  }
+
+  .project-card:hover { background: var(--bg3); }
+  .project-card:hover::before { height: 100%; }
+
+  .project-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    font-size: 13px;
+    color: var(--muted2);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .ptag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    color: var(--muted2);
+    border-radius: 1px;
+    letter-spacing: 0.06em;
+  }
+
+  /* === EXPÉRIENCES === */
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 0.5px solid var(--border);
+    position: relative;
+  }
+
+  .exp-item:first-child { padding-top: 0; }
+
+  .exp-meta {}
+
+  .exp-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+  }
+
+  .exp-company {
+    font-size: 12px;
+    color: var(--muted2);
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-location {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .exp-content {}
+
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .exp-desc {
+    font-size: 13px;
+    color: var(--muted2);
+    line-height: 1.75;
+  }
+
+  /* === FORMATION === */
+  .edu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+  }
+
+  .edu-item {
+    background: var(--bg);
+    padding: 1.75rem 2rem;
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    transition: background 0.2s;
+  }
+
+  .edu-item:hover { background: var(--bg3); }
+
+  .edu-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .edu-school {
+    font-size: 12px;
+    color: var(--muted2);
+  }
+
+  .edu-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border: 0.5px solid rgba(76,175,125,0.3);
+    color: var(--green);
+    border-radius: 2px;
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+  }
+
+  /* === LANGUES === */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+  }
+
+  .lang-item {
+    background: var(--bg);
+    padding: 1.5rem 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .lang-item:hover { background: var(--bg3); }
+
+  .lang-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .lang-level {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+  }
+
+  .lang-bar {
+    height: 2px;
+    background: var(--border2);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .lang-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 1px;
+    transition: width 1s ease;
+  }
+
+  /* === CONTACT === */
+  .contact-section {
+    padding: 100px 3rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .contact-left h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1.0;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-left h2 span { color: var(--accent); }
+
+  .contact-left p {
+    font-size: 14px;
+    color: var(--muted2);
+    line-height: 1.75;
+    max-width: 380px;
+  }
+
+  .contact-right {}
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 0.5px solid var(--border);
+    text-decoration: none;
+    transition: padding-left 0.2s;
+  }
+
+  .contact-row:hover { padding-left: 8px; }
+
+  .contact-row-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    width: 16px;
+    letter-spacing: 0;
+  }
+
+  .contact-row-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    width: 80px;
+  }
+
+  .contact-row-value {
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* === FOOTER === */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-tech {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* === ANIMATED LINE === */
+  .scan-line {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    animation: scan 6s linear infinite;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 300;
+  }
+
+  @keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+  }
+
+  /* === GLOW CURSOR === */
+  .noise {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { padding: 0 1.5rem; padding-top: 80px; }
+    .hero-name { font-size: 52px; }
+    section { padding: 70px 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .edu-item { grid-template-columns: 80px 1fr; }
+    .edu-badge { display: none; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-right { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .lang-grid { grid-template-columns: 1fr 1fr; }
+    .hero-name { font-size: 40px; }
+    .nav-links { display: none; }
+  }
+
+  /* FADE IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="scan-line"></div>
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">hs_portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#experience">Expériences</a></li>
+    <li><a href="#education">Formation</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div style="padding-top: 60px;">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Étudiant L3 · Sorbonne Université · Paris</div>
+      <h1 class="hero-name">
+        Hani
+        <span class="highlight">Slimani</span>
+      </h1>
+      <p class="hero-subtitle">Informatique · Réseaux · Systèmes · Cybersécurité</p>
+      <p class="hero-desc">
+        Étudiant en 3ème année de Licence Informatique à Sorbonne Université, passionné par les systèmes, les réseaux et la cybersécurité. Curieux, rigoureux, orienté solutions.
+      </p>
+      <div class="hero-ctas">
+        <a href="mailto:haniislimani@gmail.com" class="btn-primary">Me contacter</a>
+        <a href="https://github.com/HaniSlimani" target="_blank" class="btn-ghost">GitHub →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Projets</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Langues</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">2026</div>
+          <div class="stat-label">Diplôme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT + SKILLS -->
+<section id="about" class="fade-in">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">À propos</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        Je m'appelle <strong>Hani Slimani</strong>, étudiant en Licence 3 Informatique à <strong>Sorbonne Université</strong>. Né en Algérie, j'ai obtenu mon Baccalauréat spécialité mathématiques avec <strong>mention Très Bien</strong> (17,27/20) avant de rejoindre Paris en 2023.
+      </p>
+      <p>
+        Mes domaines de prédilection sont les <strong>réseaux, les systèmes d'exploitation, la cybersécurité</strong> et la programmation système. Je m'épanouis dans des environnements techniques exigeants, en équipe ou en autonomie.
+      </p>
+      <p>
+        En parallèle de mes études, je travaille en tant qu'<strong>ambassadeur Nespresso</strong> et comme <strong>employé commercial chez Auchan</strong>, développant ainsi une polyvalence et une capacité d'adaptation au quotidien.
+      </p>
+      <p>
+        Mes objectifs : intégrer un <strong>Master Réseaux / Cybersécurité / SI</strong> pour me spécialiser, idéalement en alternance, avec une ambition internationale.
+      </p>
+    </div>
+
+    <div class="skills-col">
+      <div class="skill-category">
+        <div class="skill-cat-label">Systèmes &amp; Réseaux</div>
+        <div class="skill-tags">
+          <span class="tag accent">Linux</span>
+          <span class="tag accent">Shell</span>
+          <span class="tag">TCP/IP</span>
+          <span class="tag">SSH</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label">Développement</div>
+        <div class="skill-tags">
+          <span class="tag accent">Java</span>
+          <span class="tag accent">Python</span>
+          <span class="tag">C</span>
+          <span class="tag">OCaml</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">React.js</span>
+          <span class="tag">Node.js</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label">Bases de données</div>
+        <div class="skill-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">HFSQL</span>
+          <span class="tag">Indexation</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label">Cybersécurité &amp; Outils</div>
+        <div class="skill-tags">
+          <span class="tag accent">Wireshark</span>
+          <span class="tag">Cryptographie</span>
+          <span class="tag">Pentesting</span>
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">GitLab</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projects" class="fade-in">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projets</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-year">2025 — Sorbonne Université</div>
+      <div class="project-name">PinBoard — Éditeur Vectoriel</div>
+      <div class="project-desc">Éditeur de dessins vectoriels orienté objet avec implémentation des patterns Observer, Composite et Command. Fonctionnalités undo/redo, copier-coller et regroupement d'objets.</div>
+      <div class="project-tags">
+        <span class="ptag">Java</span>
+        <span class="ptag">JavaFX</span>
+        <span class="ptag">Design Patterns</span>
+        <span class="ptag">OOP</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2025 — Sorbonne Université</div>
+      <div class="project-name">Simulateur de CPU</div>
+      <div class="project-desc">Processeur virtuel capable d'analyser et d'exécuter du code pseudo-assembleur. Gestion des registres, pipeline fetch–decode–execute, tables de hachage et listes chaînées.</div>
+      <div class="project-tags">
+        <span class="ptag">C</span>
+        <span class="ptag">Assembleur</span>
+        <span class="ptag">Architecture</span>
+        <span class="ptag">Mémoire dynamique</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2024 — Sorbonne Université</div>
+      <div class="project-name">Simulation Proies–Prédateurs</div>
+      <div class="project-desc">Simulation d'un écosystème par automate cellulaire. Visualisation avec Pygame, analyse des dynamiques de population avec NumPy et Matplotlib.</div>
+      <div class="project-tags">
+        <span class="ptag">Python</span>
+        <span class="ptag">Pygame</span>
+        <span class="ptag">NumPy</span>
+        <span class="ptag">Matplotlib</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2024 — Sorbonne Université</div>
+      <div class="project-name">Automates Finis</div>
+      <div class="project-desc">Implémentation d'automates finis déterministes et non-déterministes : création, déterminisation, minimisation et simulation de langages formels.</div>
+      <div class="project-tags">
+        <span class="ptag">Java</span>
+        <span class="ptag">Théorie des langages</span>
+        <span class="ptag">Algorithmique</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2023 — Béjaïa, Algérie</div>
+      <div class="project-name">Application Pharmacie</div>
+      <div class="project-desc">Application de gestion complète pour pharmacie : caisse, clients et stock de produits. Développée en WinDev avec interface, logique applicative et base de données intégrées.</div>
+      <div class="project-tags">
+        <span class="ptag">WinDev</span>
+        <span class="ptag">HFSQL</span>
+        <span class="ptag">Gestion</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-year">2023 — Sorbonne Université</div>
+      <div class="project-name">IA Prédiction Covid-19</div>
+      <div class="project-desc">Modèle de machine learning prédisant la probabilité et la gravité d'infection au Covid-19 à partir de données cliniques réelles. Prétraitement, feature engineering, évaluation.</div>
+      <div class="project-tags">
+        <span class="ptag">Python</span>
+        <span class="ptag">scikit-learn</span>
+        <span class="ptag">Data Science</span>
+        <span class="ptag">ML</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPÉRIENCES -->
+<section id="experience" class="fade-in">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Expériences</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Oct 2024 — Présent</div>
+        <div class="exp-company">Nespresso</div>
+        <div class="exp-location">Île-de-France</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-title">Ambassadeur de Marque</div>
+        <div class="exp-desc">Animation de stands et promotion des produits dans différents points de vente à Paris et en Île-de-France. Développement des compétences en argumentation commerciale et représentation d'une marque internationale haut de gamme.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Déc 2024 — Déc 2025</div>
+        <div class="exp-company">Auchan Okabé</div>
+        <div class="exp-location">Kremlin-Bicêtre</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-title">Employé Commercial — Poissonnerie</div>
+        <div class="exp-desc">Gestion des priorités et organisation en environnement exigeant. Standards stricts d'hygiène, service client constant. Développement de la rigueur et de la résistance au stress.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Mars — Mai 2024</div>
+        <div class="exp-company">La Marina</div>
+        <div class="exp-location">Paris, France</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-title">Employé Polyvalent &amp; Caissier</div>
+        <div class="exp-desc">Encaissement, réapprovisionnement, gestion des stocks et tenue générale du point de vente. Autonomie et polyvalence au quotidien.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Avr — Août 2023</div>
+        <div class="exp-company">Foire du Trône</div>
+        <div class="exp-location">Paris, France</div>
+      </div>
+      <div class="exp-content">
+        <div class="exp-title">Agent d'Attraction</div>
+        <div class="exp-desc">Gestion de la sécurité des visiteurs, animation et communication avec un public varié. Première expérience professionnelle structurante.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="education" class="fade-in">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Formation</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-list">
+    <div class="edu-item">
+      <div class="edu-year">2025–2026</div>
+      <div>
+        <div class="edu-degree">Licence 3 Informatique</div>
+        <div class="edu-school">Sorbonne Université FSI — Paris, France</div>
+      </div>
+      <div class="edu-badge">En cours</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2024–2025</div>
+      <div>
+        <div class="edu-degree">Licence 2 Informatique</div>
+        <div class="edu-school">Sorbonne Université FSI — Paris, France</div>
+      </div>
+      <div class="edu-badge">Validé</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2023–2024</div>
+      <div>
+        <div class="edu-degree">Licence 1 — Portail Sciences Formelles</div>
+        <div class="edu-school">Sorbonne Université FSI — Paris, France</div>
+      </div>
+      <div class="edu-badge">Validé</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2023</div>
+      <div>
+        <div class="edu-degree">Baccalauréat spécialité Mathématiques</div>
+        <div class="edu-school">Lycée Chabane Amar — Béjaïa, Algérie</div>
+      </div>
+      <div class="edu-badge">TB · 17.27/20</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2023</div>
+      <div>
+        <div class="edu-degree">Formation WinDev</div>
+        <div class="edu-school">Développement d'applications — Alger, Algérie</div>
+      </div>
+      <div class="edu-badge">Certifié</div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUES -->
+<section class="fade-in" style="padding-top: 0;">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Langues</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="lang-grid">
+    <div class="lang-item">
+      <div class="lang-name">Kabyle</div>
+      <div class="lang-level">Langue maternelle</div>
+      <div class="lang-bar"><div class="lang-fill" style="width: 100%;"></div></div>
+    </div>
+    <div class="lang-item">
+      <div class="lang-name">Arabe</div>
+      <div class="lang-level">C1 — Courant</div>
+      <div class="lang-bar"><div class="lang-fill" style="width: 92%;"></div></div>
+    </div>
+    <div class="lang-item">
+      <div class="lang-name">Français</div>
+      <div class="lang-level">C1 — TCF</div>
+      <div class="lang-bar"><div class="lang-fill" style="width: 90%;"></div></div>
+    </div>
+    <div class="lang-item">
+      <div class="lang-name">Anglais</div>
+      <div class="lang-level">C1 — Courant</div>
+      <div class="lang-bar"><div class="lang-fill" style="width: 88%;"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section fade-in" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <h2>Travaillons<br><span>ensemble.</span></h2>
+      <p>Ouvert aux opportunités d'alternance et de stage en réseaux, cybersécurité, systèmes et développement. N'hésitez pas à me contacter.</p>
+    </div>
+    <div class="contact-right">
+      <a href="tel:+33621830434" class="contact-row" style="text-decoration:none; color: inherit;">
+        <span class="contact-row-icon">#</span>
+        <span class="contact-row-label">Téléphone</span>
+        <span class="contact-row-value">+33 6 21 83 04 34</span>
+      </a>
+      <a href="mailto:haniislimani@gmail.com" class="contact-row" style="text-decoration:none; color: inherit;">
+        <span class="contact-row-icon">@</span>
+        <span class="contact-row-label">Email</span>
+        <span class="contact-row-value">haniislimani@gmail.com</span>
+      </a>
+      <div class="contact-row">
+        <span class="contact-row-icon">~</span>
+        <span class="contact-row-label">Ville</span>
+        <span class="contact-row-value">Vitry-sur-Seine, 94400</span>
+      </div>
+      <a href="https://github.com/HaniSlimani" target="_blank" class="contact-row" style="text-decoration:none; color: inherit;">
+        <span class="contact-row-icon">$</span>
+        <span class="contact-row-label">GitHub</span>
+        <span class="contact-row-value">HaniSlimani</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Hani Slimani</span>
+  <span class="footer-tech">Built with HTML · CSS · JS</span>
+</footer>
+
+<script>
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--text)' : '';
+    });
+  });
+
+  // Animate lang bars on load
+  setTimeout(() => {
+    document.querySelectorAll('.lang-fill').forEach(b => {
+      const w = b.style.width;
+      b.style.width = '0';
+      setTimeout(() => b.style.width = w, 100);
+    });
+  }, 500);
+</script>
+</body>
+</html>
